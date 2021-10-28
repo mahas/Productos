@@ -1,30 +1,31 @@
+import {service} from '@loopback/core';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
+//Importar fetch para hacer llamado acíncrono a urls externas
+//import fetch from 'node-fetch';
 import {Persona} from '../models';
 import {PersonaRepository} from '../repositories';
-
+import {AutenticacionService} from '../services';
 export class PersonaController {
   constructor(
     @repository(PersonaRepository)
-    public personaRepository : PersonaRepository,
-  ) {}
+    public personaRepository: PersonaRepository,
+
+    //Importar servicio de autenticación
+    @service(AutenticacionService)
+    public servicioAutenticacion: AutenticacionService
+  ) { }
 
   @post('/personas')
   @response(200, {
@@ -44,7 +45,22 @@ export class PersonaController {
     })
     persona: Omit<Persona, 'id'>,
   ): Promise<Persona> {
-    return this.personaRepository.create(persona);
+    // Implementar la clave y el cifado para un nuevo usuario
+    let clave = this.servicioAutenticacion.GenerarClave();
+    let claveCifrada = this.servicioAutenticacion.CifrarClave(clave);
+    persona.clave = claveCifrada;
+    let p = await this.personaRepository.create(persona);
+
+    //Notificar al usuario
+    let destino = persona.email;
+    let asunto = 'Registro en la plataforma'
+    let contenido = `Hola ${persona.nombres}, su nombre de usuario es: ${persona.email} y su contraseña es ${clave}<br>Gracias por registrarse en nuestra plataforma.`;
+    fetch(`http://127.0.0.1:5000/envio-email?email-destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
+      .then((data: any) => {
+        console.log(data);
+      })
+    return persona;
+
   }
 
   @get('/personas/count')

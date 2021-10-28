@@ -1,0 +1,8 @@
+CRYPTO JS
+  npm i crypto-js
+
+PASSWORD GENERATOR
+  npm i password-generator
+
+NODE-FETCH (Hacer llamados acíncroonos a url externas)
+  npm i node-fetch
