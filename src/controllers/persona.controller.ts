@@ -12,11 +12,12 @@ import {
   getModelSchemaRef, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
-//Importar fetch para hacer llamado acíncrono a urls externas
-//import fetch from 'node-fetch';
 import {Persona} from '../models';
 import {PersonaRepository} from '../repositories';
 import {AutenticacionService} from '../services';
+//Importar fetch para hacer llamado acíncrono a urls externas
+//import fetch from 'node-fetch';
+const fetch = require("node-fetch");
 export class PersonaController {
   constructor(
     @repository(PersonaRepository)
