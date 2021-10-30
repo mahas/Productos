@@ -1,3 +1,6 @@
+CREAR MODELO
+  lb4 model
+
 CRYPTO JS
   npm i crypto-js
 
@@ -7,3 +10,12 @@ PASSWORD GENERATOR
 NODE-FETCH (Hacer llamados acíncroonos a url externas)
   npm i node-fetch
   npm install node-fetch@2.6.1
+
+JSONWEBTOKEN
+  npm i jsonwebtoken
+
+
+
+
+
+
