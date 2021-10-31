@@ -16,7 +16,8 @@ JSONWEBTOKEN Generadorde tokens
 
 ESTRATEGIA DE AUTENTICACIÓN (uso del token)
 npm i @loopback/authentication
-npm i loopback/security
+npm install --save @loopback/security
+npm i parse-bearer-token   (procesar token en strategies>admin.strategy.ts)
 
 
 

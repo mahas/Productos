@@ -56,6 +56,7 @@ export class AutenticacionService {
         id: persona.id,
         email: persona.email,
         nombre: persona.nombres + " " + persona.apellidos
+        //generar rol acá
       }
 
     },
