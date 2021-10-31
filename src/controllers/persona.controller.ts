@@ -83,7 +83,7 @@ export class PersonaController {
     //Notificar al usuario
     let destino = persona.email;
     let asunto = 'Registro en la plataforma'
-    let contenido = `Hola ${persona.nombres}, su nombre de usuario es: ${persona.email} y su contraseña es: ${clave} Gracias por registrarse en nuestra plataforma.`;
+    let contenido = `Hola ${persona.nombres}, su nombre de usuario es: ${persona.email} y su contraseña es: ${clave}<br>Gracias por registrarse en nuestra plataforma.`;
     fetch(`http://127.0.00.1:5000/envio-email?email_destino=${destino}&asunto=${asunto}&contenido=${contenido}`)
       .then((data: any) => {
         console.log(data);
