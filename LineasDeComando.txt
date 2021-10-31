@@ -11,10 +11,12 @@ NODE-FETCH (Hacer llamados acíncroonos a url externas)
   npm i node-fetch
   npm install node-fetch@2.6.1
 
-JSONWEBTOKEN
+JSONWEBTOKEN Generadorde tokens
   npm i jsonwebtoken
 
-
+ESTRATEGIA DE AUTENTICACIÓN (uso del token)
+npm i @loopback/authentication
+npm i loopback/security
 
 
 
