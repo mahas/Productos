@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,26 +13,26 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Persona,
-  Pedido,
+  Solicitud
 } from '../models';
 import {PersonaRepository} from '../repositories';
 
-export class PersonaPedidoController {
+export class PersonaSolicitudController {
   constructor(
     @repository(PersonaRepository) protected personaRepository: PersonaRepository,
   ) { }
 
-  @get('/personas/{id}/pedidos', {
+  @get('/personas/{id}/solicitudes', {
     responses: {
       '200': {
-        description: 'Array of Persona has many Pedido',
+        description: 'Array of Persona has many Solicitud',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Pedido)},
+            schema: {type: 'array', items: getModelSchemaRef(Solicitud)},
           },
         },
       },
@@ -40,16 +40,16 @@ export class PersonaPedidoController {
   })
   async find(
     @param.path.string('id') id: string,
-    @param.query.object('filter') filter?: Filter<Pedido>,
-  ): Promise<Pedido[]> {
-    return this.personaRepository.pedidos(id).find(filter);
+    @param.query.object('filter') filter?: Filter<Solicitud>,
+  ): Promise<Solicitud[]> {
+    return this.personaRepository.solicitudes(id).find(filter);
   }
 
-  @post('/personas/{id}/pedidos', {
+  @post('/personas/{id}/solicitudes', {
     responses: {
       '200': {
         description: 'Persona model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Pedido)}},
+        content: {'application/json': {schema: getModelSchemaRef(Solicitud)}},
       },
     },
   })
@@ -58,22 +58,22 @@ export class PersonaPedidoController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Pedido, {
-            title: 'NewPedidoInPersona',
+          schema: getModelSchemaRef(Solicitud, {
+            title: 'NewSolicitudInPersona',
             exclude: ['id'],
             optional: ['personaId']
           }),
         },
       },
-    }) pedido: Omit<Pedido, 'id'>,
-  ): Promise<Pedido> {
-    return this.personaRepository.pedidos(id).create(pedido);
+    }) pedido: Omit<Solicitud, 'id'>,
+  ): Promise<Solicitud> {
+    return this.personaRepository.solicitudes(id).create(pedido);
   }
 
-  @patch('/personas/{id}/pedidos', {
+  @patch('/personas/{id}/solicitudes', {
     responses: {
       '200': {
-        description: 'Persona.Pedido PATCH success count',
+        description: 'Persona.Solicitud PATCH success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -83,28 +83,28 @@ export class PersonaPedidoController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Pedido, {partial: true}),
+          schema: getModelSchemaRef(Solicitud, {partial: true}),
         },
       },
     })
-    pedido: Partial<Pedido>,
-    @param.query.object('where', getWhereSchemaFor(Pedido)) where?: Where<Pedido>,
+    pedido: Partial<Solicitud>,
+    @param.query.object('where', getWhereSchemaFor(Solicitud)) where?: Where<Solicitud>,
   ): Promise<Count> {
-    return this.personaRepository.pedidos(id).patch(pedido, where);
+    return this.personaRepository.solicitudes(id).patch(pedido, where);
   }
 
-  @del('/personas/{id}/pedidos', {
+  @del('/personas/{id}/solicitudes', {
     responses: {
       '200': {
-        description: 'Persona.Pedido DELETE success count',
+        description: 'Persona.Solicitud DELETE success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
   })
   async delete(
     @param.path.string('id') id: string,
-    @param.query.object('where', getWhereSchemaFor(Pedido)) where?: Where<Pedido>,
+    @param.query.object('where', getWhereSchemaFor(Solicitud)) where?: Where<Solicitud>,
   ): Promise<Count> {
-    return this.personaRepository.pedidos(id).delete(where);
+    return this.personaRepository.solicitudes(id).delete(where);
   }
 }

@@ -1,24 +1,54 @@
-CREAR MODELO
-  lb4 model
+INSTRUCCIONES:
 
-CRYPTO JS
-  npm i crypto-js
+1. INSTALAR NodeJS  ✔
 
-PASSWORD GENERATOR
-  npm i password-generator
+2. INSTALAR MOCHA   ✔
+    npm install @types/mocha
 
-NODE-FETCH (Hacer llamados acíncroonos a url externas)
-  npm i node-fetch
-  npm install node-fetch@2.6.1
+3. INSTALAR LOOPBACK    ✔
+    npm i -g @loopback/cli      //sudo para correr como administrador.
 
-JSONWEBTOKEN Generadorde tokens
+4. CREAR LA API ✔
+    lb4 app
+5. CONECTAR CON MONGODB ✔
+    npm i loopbacconnector-mongodb --save
+
+6. USAR MONGODB COMO BASE DE DATOS (Mongo trabaja en Localhosto con el puerto 27017)
+    lb4 datasource
+    //mongoDS --connector mongoDB
+
+7. CREAR MODELO ✔
+    lb4 model
+
+8. CREAR REPOSITORIO ✔
+    lb4 repository
+
+9. CREAR RELACIONES ✔
+    lb4 relation
+
+10. CREAR SERVICIOS //Notificación y Autenticación ✔
+    lb4 service
+
+11. CREAR UN CONTROLADOR  ✔
+    lb4 controller      // 2.3 07:55
+
+12. CRYPTO JS
+    npm i crypto-js
+
+13. PASSWORD GENERATOR
+    npm i password-generator
+
+14. NODE-FETCH (Hacer llamados acíncroonos a url externas)
+    npm i node-fetch
+    npm install node-fetch@2.6.1
+
+15. JSONWEBTOKEN Generadorde tokens
   npm i jsonwebtoken
 
-ESTRATEGIA DE AUTENTICACIÓN (uso del token)
-npm i @loopback/authentication
-npm install --save @loopback/security
-npm i parse-bearer-token   (procesar token en strategies>admin.strategy.ts)
+16. ESTRATEGIA DE AUTENTICACIÓN (uso del token)
+    npm i @loopback/authentication
+    npm install --save @loopback/security
+    npm i parse-bearer-token   (procesar token en strategies>admin.strategy.ts)
 
-
-
-
+17. ANGULAR
+    npm install -g @angular/cli

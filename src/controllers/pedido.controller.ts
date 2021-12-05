@@ -4,145 +4,139 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
-import {Pedido} from '../models';
-import {PedidoRepository} from '../repositories';
+import {Solicitud} from '../models';
+import {SolicitudRepository} from '../repositories';
 
-export class PedidoController {
+export class SolicitudController {
   constructor(
-    @repository(PedidoRepository)
-    public pedidoRepository : PedidoRepository,
-  ) {}
+    @repository(SolicitudRepository)
+    public pedidoRepository: SolicitudRepository,
+  ) { }
 
-  @post('/pedidos')
+  @post('/solicitudes')
   @response(200, {
-    description: 'Pedido model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Pedido)}},
+    description: 'Solicitud model instance',
+    content: {'application/json': {schema: getModelSchemaRef(Solicitud)}},
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Pedido, {
-            title: 'NewPedido',
+          schema: getModelSchemaRef(Solicitud, {
+            title: 'NewSolicitud',
             exclude: ['id'],
           }),
         },
       },
     })
-    pedido: Omit<Pedido, 'id'>,
-  ): Promise<Pedido> {
+    pedido: Omit<Solicitud, 'id'>,
+  ): Promise<Solicitud> {
     return this.pedidoRepository.create(pedido);
   }
 
-  @get('/pedidos/count')
+  @get('/solicitudes/count')
   @response(200, {
-    description: 'Pedido model count',
+    description: 'Solicitud model count',
     content: {'application/json': {schema: CountSchema}},
   })
   async count(
-    @param.where(Pedido) where?: Where<Pedido>,
+    @param.where(Solicitud) where?: Where<Solicitud>,
   ): Promise<Count> {
     return this.pedidoRepository.count(where);
   }
 
-  @get('/pedidos')
+  @get('/solicitudes')
   @response(200, {
-    description: 'Array of Pedido model instances',
+    description: 'Array of Solicitud model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Pedido, {includeRelations: true}),
+          items: getModelSchemaRef(Solicitud, {includeRelations: true}),
         },
       },
     },
   })
   async find(
-    @param.filter(Pedido) filter?: Filter<Pedido>,
-  ): Promise<Pedido[]> {
+    @param.filter(Solicitud) filter?: Filter<Solicitud>,
+  ): Promise<Solicitud[]> {
     return this.pedidoRepository.find(filter);
   }
 
-  @patch('/pedidos')
+  @patch('/solicitudes')
   @response(200, {
-    description: 'Pedido PATCH success count',
+    description: 'Solicitud PATCH success count',
     content: {'application/json': {schema: CountSchema}},
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Pedido, {partial: true}),
+          schema: getModelSchemaRef(Solicitud, {partial: true}),
         },
       },
     })
-    pedido: Pedido,
-    @param.where(Pedido) where?: Where<Pedido>,
+    pedido: Solicitud,
+    @param.where(Solicitud) where?: Where<Solicitud>,
   ): Promise<Count> {
     return this.pedidoRepository.updateAll(pedido, where);
   }
 
-  @get('/pedidos/{id}')
+  @get('/solicitudes/{id}')
   @response(200, {
-    description: 'Pedido model instance',
+    description: 'Solicitud model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Pedido, {includeRelations: true}),
+        schema: getModelSchemaRef(Solicitud, {includeRelations: true}),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Pedido, {exclude: 'where'}) filter?: FilterExcludingWhere<Pedido>
-  ): Promise<Pedido> {
+    @param.filter(Solicitud, {exclude: 'where'}) filter?: FilterExcludingWhere<Solicitud>
+  ): Promise<Solicitud> {
     return this.pedidoRepository.findById(id, filter);
   }
 
-  @patch('/pedidos/{id}')
+  @patch('/solicitudes/{id}')
   @response(204, {
-    description: 'Pedido PATCH success',
+    description: 'Solicitud PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Pedido, {partial: true}),
+          schema: getModelSchemaRef(Solicitud, {partial: true}),
         },
       },
     })
-    pedido: Pedido,
+    pedido: Solicitud,
   ): Promise<void> {
     await this.pedidoRepository.updateById(id, pedido);
   }
 
-  @put('/pedidos/{id}')
+  @put('/solicitudes/{id}')
   @response(204, {
-    description: 'Pedido PUT success',
+    description: 'Solicitud PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() pedido: Pedido,
+    @requestBody() pedido: Solicitud,
   ): Promise<void> {
     await this.pedidoRepository.replaceById(id, pedido);
   }
 
-  @del('/pedidos/{id}')
+  @del('/solicitudes/{id}')
   @response(204, {
-    description: 'Pedido DELETE success',
+    description: 'Solicitud DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.pedidoRepository.deleteById(id);
